@@ -1,0 +1,26 @@
+{
+  "name": "beerview",
+  "version": "1.0.0",
+  "description": "A high powered beer review site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timsvoice/beerview.git"
+  },
+  "keywords": [
+    "graphql",
+    "react",
+    "apollo",
+    "stack",
+    "node"
+  ],
+  "author": "Timothy Voice",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/timsvoice/beerview/issues"
+  },
+  "homepage": "https://github.com/timsvoice/beerview#readme"
+}
