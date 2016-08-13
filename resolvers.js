@@ -1,5 +1,5 @@
 const resolvers = {
-  Query: {
+  RootQuery: {
     beer() {
       return {
         id: 'aOx1',
