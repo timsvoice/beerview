@@ -7,17 +7,7 @@
 // We're going to create and expose a resolvers object
 // on this object, create a RootQuery with a Beer method
 // the beer method should return an object with an id, name, and description
-const resolvers = {
-  RootQuery: {
-    beer() {
-      return {
-        id: 'aOx1',
-        name: 'Beer',
-        description: 'A really good beer',
-      };
-    },
-  },
-};
+const resolvers = {};
 
 // Export the resolvers object as the default
 export default resolvers;

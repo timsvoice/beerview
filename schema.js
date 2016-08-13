@@ -5,19 +5,7 @@
 // we can export.
 
 const typeDefinitions = `
-  type Beer {
-    id: String,
-    name: String,
-    description: String
-  }
-
-  type RootQuery {
-    beer(name: String): Beer
-  }
-
-  schema {
-    query: RootQuery
-  }
+  // write your schema and RootQuery here
 `;
 
 // export your typeDefinitions as the default

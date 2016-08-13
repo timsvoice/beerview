@@ -18,10 +18,7 @@ const GRAPHQL_PORT = (process.env.PORT || 8000);
 // Note: the schema and resolvers fields are required and your
 // graphql server wont work without them
 app.use('/graphql', apolloServer({
-  graphiql: true,
-  pretty: true,
-  schema: Schema,
-  resolvers: Resolvers,
+  // config apolloServer here
 }));
 
 // Tell your server to listen for requests on your
