@@ -4,8 +4,14 @@
   "description": "A high powered beer review site",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "start": "./node_modules/.bin/babel-node ./server.js",
     "test": "mocha --compilers js:babel-core/register"
+=======
+    "dev": "nodemon ./server.js --exec babel-node",
+    "test": "mocha --compilers js:babel-core/register",
+    "lesson-test": "mocha ./test/lesson/ --compilers js:babel-core/register"
+>>>>>>> lesson-two-solution
   },
   "repository": {
     "type": "git",
@@ -36,15 +42,17 @@
     "babel-preset-es2015": "6.5.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "6.5.0",
+    "chai": "^3.5.0",
     "eslint": "^2.4.0",
     "eslint-config-airbnb": "^6.1.0",
     "eslint-plugin-import": "^1.1.0",
     "eslint-plugin-react": "^4.2.3",
+    "graphql": "^0.6.0",
+    "mocha": "^3.0.2",
     "nodemon": "^1.9.1",
-    "graphql": "^0.6.0"
-  },
-  "peerDependencies": {
-    "graphql": "^0.5.0 || ^0.6.0"
+    "request": "^2.74.0",
+    "sinon": "^1.17.5",
+    "webpack": "^1.13.1"
   },
   "eslintConfig": {
     "parser": "babel-eslint",
