@@ -7,11 +7,11 @@ import Resolvers from './resolvers.js';
 const app = express();
 
 // We're going to need to tell our server wich port to use
-// We're going to deploy to Heroku later, and Heroku,
+// We're going to deploy to Heroku later. Heroku,
 // dynamically assigns the port to our app so we need
-// to read the port from an env variable.
-// In local development we want to use a consistant port
-// In this case, port 8000
+// to read the port from an env variable named PORT.
+// If we're developing locally (there is no PORT env variable)
+// we want to use a consistant port. In this case, port 8000.
 const GRAPHQL_PORT = (process.env.PORT || 8000);
 
 // We want to expose a /graphql endpoint and configure apolloServer
