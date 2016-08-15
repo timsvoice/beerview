@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "A high powered beer review site",
   "main": "index.js",
-  "scripts": {
+  "scripts": {    
+    "start": "./node_modules/.bin/babel-node ./server.js",
     "dev": "nodemon ./server.js --exec babel-node",
     "test": "mocha --compilers js:babel-core/register",
     "lesson-test": "mocha ./test/lesson/ --compilers js:babel-core/register"
