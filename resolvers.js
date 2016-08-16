@@ -7,8 +7,22 @@
 // We're going to create and expose a resolvers object
 // on this object, create a RootQuery with a Beer method
 // the beer method should return an object with an id, name, and description
+
+import { Review } from './connectors.js';
+
 const resolvers = {
   RootQuery: {
+    // Lesson #3 will require us to add a review method to the query so
+    // users can retrieve reviews from the database. We will also need to import
+    // the review from our new connector
+    review(_, args) {
+      // return a review from the local mongoDB using an _id
+      return Review.findOne({ _id: args._id });
+    },
+    reviews() {
+      // Return 10 reviews from the mongoDB
+      return Review.find().limit(10).then((res) => res);
+    },
     beer() {
       return {
         id: 'aOx1',
