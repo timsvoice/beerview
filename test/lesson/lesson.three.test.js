@@ -10,6 +10,7 @@ import Resolvers from '../../resolvers.js';
 
 describe('MongoDB Setup', function () {
   before(function (done) {
+    console.log(mongoose.connection.host);
     const connection = mongoose.connection;
     connection.db.dropDatabase();
     done();
