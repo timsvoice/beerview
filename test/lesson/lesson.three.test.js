@@ -17,7 +17,7 @@ describe('MongoDB Setup', function () {
     };
     // create a new review
     const newReview = new Review(review);
-
+    console.log(newReview);
     // test that review is valid
     newReview.validate((err) => {
       assert.isNull(err, 'No Error');
