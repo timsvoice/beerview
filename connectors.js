@@ -14,8 +14,10 @@ Mongoose.Promise = global.Promise;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 // Connect to your MongoDB, but not when in TEST mode
-const mongo = Mongoose.connect(MONGODB_URI);
-console.log(mongo);
+if (process.env.NODE_ENV !== 'TEST') {
+  const mongo = Mongoose.connect(MONGODB_URI);
+}
+
 // We're going to use MongoDB to store our user generated reviews
 // so we need to create a review schema using Mongoose. Your schema
 // should consist of a beerId, rating, and location, all of which are required.

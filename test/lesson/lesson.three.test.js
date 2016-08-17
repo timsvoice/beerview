@@ -9,19 +9,6 @@ import Schema from '../../schema.js';
 import Resolvers from '../../resolvers.js';
 
 describe('MongoDB Setup', function () {
-  before(function (done) {
-    console.log(mongoose.connection);
-    const connection = mongoose.connection;
-    connection.db.dropDatabase();
-    done();
-  });
-
-  afterEach(function (done) {
-    const connection = mongoose.connection;
-    connection.db.dropDatabase();
-    done();
-  });
-
   it('should create a valid review from the Mongoose schema', function (done) {
     const review = {
       beerId: casual.integer(-1000, 1000),
@@ -32,7 +19,7 @@ describe('MongoDB Setup', function () {
     const newReview = new Review(review);
 
     // test that review is valid
-    newReview.save((err) => {
+    newReview.validate((err) => {
       assert.isNull(err, 'No Error');
       done();
     });
