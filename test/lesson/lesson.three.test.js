@@ -3,7 +3,6 @@
 import { assert } from 'chai';
 import sinon from 'sinon';
 import casual from 'casual';
-import mongoose from 'mongoose';
 import { Review } from '../../connectors.js';
 import Schema from '../../schema.js';
 import Resolvers from '../../resolvers.js';
@@ -17,7 +16,7 @@ describe('MongoDB Setup', function () {
     };
     // create a new review
     const newReview = new Review(review);
-    console.log(newReview);
+    console.log(newReview.validate);
     // test that review is valid
     newReview.validate((err) => {
       assert.isNull(err, 'No Error');
