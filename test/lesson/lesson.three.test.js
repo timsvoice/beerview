@@ -62,7 +62,6 @@ describe('Review Schema', function () {
 describe('Review Resolvers', function () {
   it('should find reviews using the reviews resolver', function () {
     const mongoMock = sinon.mock(Review);
-    console.log(mongoMock);
     // const spy = sinon.spy(Resolvers.RootQuery, 'reviews');
     // call the function
     Resolvers.RootQuery.reviews();
