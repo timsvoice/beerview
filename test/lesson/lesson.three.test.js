@@ -9,7 +9,7 @@ import Schema from '../../schema.js';
 import Resolvers from '../../resolvers.js';
 
 describe('MongoDB Setup', function () {
-  it('should create a valid review from the Mongoose schema', function (done) {
+  it('should create a valid review from the Mongoose schema', function () {
     const review = {
       beerId: casual.integer(-1000, 1000),
       location: casual.sentence,
@@ -21,7 +21,6 @@ describe('MongoDB Setup', function () {
     // test that review is valid
     newReview.validate((err) => {
       assert.isNull(err, 'No Error');
-      done();
     });
   });
 
@@ -63,9 +62,11 @@ describe('Review Schema', function () {
 describe('Review Resolvers', function () {
   it('should find reviews using the reviews resolver', function () {
     const mongoMock = sinon.mock(Review);
+    console.log(mongoMock);
     // const spy = sinon.spy(Resolvers.RootQuery, 'reviews');
     // call the function
     Resolvers.RootQuery.reviews();
+    console.log(Resolvers);
     // test that the returned object has the right fields
     mongoMock.expects('find').once();
   });
