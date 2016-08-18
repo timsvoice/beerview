@@ -7,15 +7,12 @@
 // In lesson #3 we're going to add a Review type to the
 // typeDefinitions so that we can allow users to create
 // a beer review
-const typeDefinitions = `
-  type Review {
-    _id: String,
-    beerId: String,
-    beer: Beer,
-    rating: Int,
-    location: String,
-  }
 
+// add your Review type here. make sure to include the fields:
+// _id, beerId, beer, rating, location
+// #hint: the beer field will need to be a object of the Beer type
+
+const typeDefinitions = `
   type Beer {
     id: String,
     name: String,

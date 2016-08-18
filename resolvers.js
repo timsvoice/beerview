@@ -8,6 +8,7 @@
 // on this object, create a RootQuery with a Beer method
 // the beer method should return an object with an id, name, and description
 
+// Import the Review object from your connectors
 import { Review } from './connectors.js';
 
 const resolvers = {
@@ -15,13 +16,21 @@ const resolvers = {
     // Lesson #3 will require us to add a review method to the query so
     // users can retrieve reviews from the database. We will also need to import
     // the review from our new connector
+
+    // create a review method that accepts two arguemnts (_, agrs)
+    // This method should return a review from the Mongoose model
+    // #hint: you can call findOne on the Review object and pass
+    // it an object with an _id field (use args to get this value)
     review(_, args) {
-      // return a review from the local mongoDB using an _id
-      return Review.findOne({ _id: args._id });
+      // Return a review using the _id passed in by args
     },
+    // create a reviews method that returns a collection of
+    // reviews from the Mongoose model
+    // #hint: you can call find() on the the Review object
+    // and then limit the number of documents returned with the limit() method
+    // This will return a promise, so you will need to call then() to return the documents
     reviews() {
       // Return 10 reviews from the mongoDB
-      return Review.find().limit(10).then((res) => res);
     },
     beer() {
       return {
