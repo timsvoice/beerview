@@ -78,4 +78,16 @@ describe('Review Resolvers', function () {
     mongoMock.verify();
     mongoMock.restore();
   });
+  it('should save a Review submitted to the Mutation Resolver', function () {
+    const mongoMock = sinon.mock(Review.prototype);
+    const args = { beerId: 'aXY3z', rating: 5, location: casual.sentences };
+    // setup the expectations
+    mongoMock.expects('save').once().withArgs(args);
+    // call the function. '_' is here because GraphQL
+    // gives the first argument in a query
+    Resolvers.Mutations.submitReview('_', args);
+    // verify that our mongoMock expectations were satisfied
+    mongoMock.verify();
+    mongoMock.restore();
+  });
 });
