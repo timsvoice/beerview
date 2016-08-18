@@ -31,6 +31,16 @@ const resolvers = {
       };
     },
   },
+  Mutation: {
+    submitReview(_, { beerId, rating, location }) {
+      const review = new Review({ beerId, rating, location });
+      return review.save((err, res) => {
+        if (err) console.log(err);
+        console.log(res);
+        return res;
+      });
+    },
+  },
 };
 
 // Export the resolvers object as the default
