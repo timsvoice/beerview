@@ -7,46 +7,46 @@ import { Review } from '../../connectors.js';
 import Schema from '../../schema.js';
 import Resolvers from '../../resolvers.js';
 
-// describe('MongoDB Setup', function () {
-//   it('should create a valid review from the Mongoose schema', function () {
-//     const review = {
-//       beerId: casual.integer(-1000, 1000),
-//       location: casual.sentence,
-//       rating: casual.integer(0, 5),
-//     };
-//     // create a new review
-//     const newReview = new Review(review);
-//     // test that review is valid
-//     newReview.validate((err) => {
-//       assert.isNull(err, 'No Error');
-//     });
-//   });
-//
-//   it('should not create a valid review without a beerId, location, and rating', function (done) {
-//     const review = {};
-//
-//     // create a new review
-//     const newReview = new Review(review);
-//
-//     // test that review is not valid and that it
-//     // returns an error saying beerId is required
-//     newReview.validate((err) => {
-//       assert.equal(
-//         err.errors.beerId.message,
-//         'Path `beerId` is required.'
-//       );
-//       assert.equal(
-//         err.errors.rating.message,
-//         'Path `rating` is required.'
-//       );
-//       assert.equal(
-//         err.errors.location.message,
-//         'Path `location` is required.'
-//       );
-//       done();
-//     });
-//   });
-// });
+describe('MongoDB Setup', function () {
+  it('should create a valid review from the Mongoose schema', function () {
+    const review = {
+      beerId: casual.integer(-1000, 1000),
+      location: casual.sentence,
+      rating: casual.integer(0, 5),
+    };
+    // create a new review
+    const newReview = new Review(review);
+    // test that review is valid
+    newReview.validate((err) => {
+      assert.isNull(err, 'No Error');
+    });
+  });
+
+  it('should not create a valid review without a beerId, location, and rating', function (done) {
+    const review = {};
+
+    // create a new review
+    const newReview = new Review(review);
+
+    // test that review is not valid and that it
+    // returns an error saying beerId is required
+    newReview.validate((err) => {
+      assert.equal(
+        err.errors.beerId.message,
+        'Path `beerId` is required.'
+      );
+      assert.equal(
+        err.errors.rating.message,
+        'Path `rating` is required.'
+      );
+      assert.equal(
+        err.errors.location.message,
+        'Path `location` is required.'
+      );
+      done();
+    });
+  });
+});
 
 describe('Review Schema', function () {
   it('should return a schema string with a new Review type', function () {
