@@ -62,7 +62,6 @@ describe('Review Resolvers', function () {
     const mongoMock = sinon.mock(Review);
     // const spy = sinon.spy(Resolvers.RootQuery, 'reviews');
     // call the function
-    console.log(Resolvers.RootQuery);
     Resolvers.RootQuery.reviews();
     // test that the returned object has the right fields
     mongoMock.expects('find').once();
