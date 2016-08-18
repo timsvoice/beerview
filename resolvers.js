@@ -40,6 +40,15 @@ const resolvers = {
       };
     },
   },
+  // We're also going to add a Mutation to allow users to add their own reviews
+  // This will need to create a new Review, and pass in a beerId, raitng, and location
+  // We can decide what the Mutation returns, but generally it's a good idea to return
+  // the saved record. You can also console.log() the error if there is one.
+  // #hint: first create a new Review and then perform the save() method on that object
+  // save() takes two arguments: (err, res)
+  Mutation: {
+    // create your Mutation action here
+  },
 };
 
 // Export the resolvers object as the default
