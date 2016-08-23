@@ -31,4 +31,8 @@ const ReviewSchema = Mongoose.Schema({
 // add new reviews to the DB
 const Review = Mongoose.model('reviews', ReviewSchema);
 
+// Once we have the local database serving up our reviews
+// and we can create reviews using a Mutator, we need to
+// fetch some tasty data from the breweryDB database.
+
 export { Review };
