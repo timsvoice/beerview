@@ -3,8 +3,8 @@
 import { assert } from 'chai';
 import sinon from 'sinon';
 import request from 'request';
-import Schema from '../../schema.js';
-import Resolvers from '../../resolvers.js';
+import Schema from '../../imports/data/schema.js';
+import Resolvers from '../../imports/data/resolvers.js';
 
 describe('Server', function () {
   it('should exist and return a response', function () {

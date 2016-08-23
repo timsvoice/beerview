@@ -3,9 +3,9 @@
 import { assert } from 'chai';
 import sinon from 'sinon';
 import casual from 'casual';
-import { Review } from '../../connectors.js';
-import Schema from '../../schema.js';
-import Resolvers from '../../resolvers.js';
+import { Review } from '../../imports/data/connectors.js';
+import Schema from '../../imports/data/schema.js';
+import Resolvers from '../../imports/data/resolvers.js';
 
 describe('MongoDB Setup', function () {
   it('should create a valid review from the Mongoose schema', function () {
