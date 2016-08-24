@@ -55,7 +55,7 @@ describe('Brewery DB Functions', function () {
   });
 
   after(function () {
-    rp.get.restore();
+    rp.restore();
   });
 
   it('should export a findBeer function', function (done) {
