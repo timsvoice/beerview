@@ -48,7 +48,7 @@
     "mocha": "^3.0.2",
     "mongoose": "^4.5.9",
     "nodemon": "^1.9.1",
-    "request": "^2.74.0",
+    "request-promise": "^4.1.1",
     "sinon": "^1.17.5",
     "webpack": "^1.13.1"
   },

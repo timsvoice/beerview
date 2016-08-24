@@ -3,31 +3,33 @@
 import { assert } from 'chai';
 import sinon from 'sinon';
 import casual from 'casual';
-import { Review } from '../../imports/data/connectors.js';
-import Schema from '../../imports/data/schema.js';
-import Resolvers from '../../imports/data/resolvers.js';
+import { Review } from '../../src/data/connectors.js';
+import Schema from '../../src/data/schema.js';
+import Resolvers from '../../src/data/resolvers.js';
+import { findBeer } from '../../src/data/brewery.db.js';
 import fs from 'fs';
 import _ from 'underscore';
+import rp from 'request-promise';
 
 describe('File System', function () {
-  it('should have an imports folder', function (done) {
-    // check that the imports folder exists
-    fs.stat('./imports', (err, stats) => {
+  it('should have an src folder', function (done) {
+    // check that the src folder exists
+    fs.stat('./src', (err, stats) => {
       if (err) console.log(err);
       assert.isNull(err);
       done();
     });
   });
-  it('should have an imports folder with both UI and API folders', function (done) {
+  it('should have an src folder with both UI and API folders', function (done) {
     // check that the data folder exist
-    fs.stat('./imports/data', (err, stats) => {
+    fs.stat('./src/data', (err, stats) => {
       if (err) console.log(err);
       assert.isNull(err);
       done();
     });
   });
-  it('should have an imports folder with our GraphQL data files', function (done) {
-    fs.readdir('./imports/data', (err, files) => {
+  it('should have an src folder with our GraphQL data files', function (done) {
+    fs.readdir('./src/data', (err, files) => {
       // check the array of files contains the files we need
       if (err) console.log(err);
       assert.isTrue(_.contains(files, 'resolvers.js'));
@@ -35,5 +37,33 @@ describe('File System', function () {
       assert.isTrue(_.contains(files, 'connectors.js'));
       done();
     });
+  });
+});
+
+describe('Brewery DB Functions', function () {
+  before(function () {
+    const beer = {
+      id: casual.word,
+      name: casual.name,
+      description: casual.sentence,
+      abv: casual.integer(0, 10),
+      glasswareId: casual.word,
+      style: casual.name,
+      label: casual.url,
+    };
+    sinon.mock(rp).returns(beer);
+  });
+
+  after(function () {
+    rp.get.restore();
+  });
+
+  it('should export a findBeer function', function (done) {
+    const beerId = 'ax1b';
+    findBeer(beerId).then((res, err) => {
+      console.log(res, err);
+      // assert.isTrue(request.get.called);
+      done();
+    }).catch((err) => { console.log(err); done(); });
   });
 });

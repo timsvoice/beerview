@@ -1,7 +1,7 @@
 import express from 'express';
 import { apolloServer } from 'apollo-server';
-import Schema from './imports/data/schema.js';
-import Resolvers from './imports/data/resolvers.js';
+import Schema from './src/data/schema.js';
+import Resolvers from './src/data/resolvers.js';
 
 // Create an express server called app
 const app = express();
