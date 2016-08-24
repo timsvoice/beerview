@@ -1,15 +1,15 @@
 /* eslint-disable func-names, prefer-arrow-callback, no-unused-vars*/
 
-import { assert } from 'chai';
-import sinon from 'sinon';
-import casual from 'casual';
-import { Review } from '../../src/data/connectors.js';
-import Schema from '../../src/data/schema.js';
-import Resolvers from '../../src/data/resolvers.js';
+import chai from 'chai';
+import chaiAsPromised from 'chai-as-promised';
+import mockery from 'mockery';
 import { findBeer } from '../../src/data/brewery.db.js';
 import fs from 'fs';
 import _ from 'underscore';
 import rp from 'request-promise';
+
+const assert = chai.assert;
+chai.use(chaiAsPromised);
 
 describe('File System', function () {
   it('should have an src folder', function (done) {
@@ -41,29 +41,8 @@ describe('File System', function () {
 });
 
 describe('Brewery DB Functions', function () {
-  before(function () {
-    const beer = {
-      id: casual.word,
-      name: casual.name,
-      description: casual.sentence,
-      abv: casual.integer(0, 10),
-      glasswareId: casual.word,
-      style: casual.name,
-      label: casual.url,
-    };
-    sinon.mock(rp).returns(beer);
-  });
-
-  after(function () {
-    rp.restore();
-  });
-
-  it('should export a findBeer function', function (done) {
-    const beerId = 'ax1b';
-    findBeer(beerId).then((res, err) => {
-      console.log(res, err);
-      // assert.isTrue(request.get.called);
-      done();
-    }).catch((err) => { console.log(err); done(); });
+  it('should export a findBeer function which returns a beer result', function () {
+    const beerId = 'oeGSxs';
+    return assert.eventually.property(findBeer(beerId), 'id');
   });
 });
