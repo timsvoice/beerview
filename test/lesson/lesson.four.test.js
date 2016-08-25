@@ -3,7 +3,7 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import mockery from 'mockery';
-import { findBeer, searchBeer } from '../../src/data/brewery.db.js';
+import beer from '../../src/data/brewery.db.js';
 import fs from 'fs';
 import _ from 'underscore';
 import rp from 'request-promise';
@@ -43,10 +43,10 @@ describe('File System', function () {
 describe('Brewery DB Functions', function () {
   it('should export a findBeer function which returns a beer result', function () {
     const beerId = 'oeGSxs';
-    return assert.eventually.property(findBeer(beerId), 'id');
+    return assert.eventually.property(beer.find(beerId), 'id');
   });
   it('should search for a beer and return < 10 results', function () {
     const beerName = 'Miller High Life';
-    return assert.eventually.isArray(searchBeer(beerName), 1);
+    return assert.eventually.isArray(beer.search(beerName), 1);
   });
 });
