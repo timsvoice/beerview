@@ -47,8 +47,6 @@ describe('Brewery DB Functions', function () {
   });
   it('should search for a beer and return < 10 results', function () {
     const beerName = 'Miller High Life';
-    searchBeer('Miller high life').then((res, err) => {
-      console.log(err, res);
-    });
+    return assert.eventually.isArray(searchBeer(beerName), 1);
   });
 });
