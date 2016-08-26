@@ -29,6 +29,7 @@ describe('Schema', function () {
 
 describe('Resolvers', function () {
   it('should return the Resolvers object', function () {
+    const args = { beerId: 'oeGSxs' };
     // test that the module returns a resolver object
     assert.isObject(Resolvers, 'Resolvers is an object');
     // test that the resolver containts a Query
@@ -37,10 +38,8 @@ describe('Resolvers', function () {
     // an id, name, and description
     const spy = sinon.spy(Resolvers.RootQuery, 'beer');
     // call the function
-    Resolvers.RootQuery.beer();
-    // test that the returned object has the right fields
-    assert.property(spy.returnValues[0], 'id');
-    assert.property(spy.returnValues[0], 'name');
-    assert.property(spy.returnValues[0], 'description');
+    Resolvers.RootQuery.beer('_', args);
+    // test that the query was called once
+    assert(spy.withArgs('_', args).calledOnce);
   });
 });
