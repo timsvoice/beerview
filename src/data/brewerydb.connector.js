@@ -3,20 +3,21 @@
 // We're going to be making HTTP calls to the
 // breweryDB so we need a simple way to do that.
 import rp from 'request-promise';
-
+import _ from 'underscore';
 // Here, we setup a few consts to make our request
-// composition simpler and easier to read
-
-// set the BASE_URL to the following
+// composition simpler and easier to read.
+// set the BASE_URL of the API, and once you have setup a free BreweryDB account
+// store your API key in an env variable.
+// We'll also set a defualt beer label if brewerydb doesn't have one for a particular beer
 const BASE_URL = 'http://api.brewerydb.com/v2';
-// setup a free account with BreweryDB and create
-// an environment variable with your unique key
 const KEY = process.env.BREWDB;
+const defaultLabel = 'http://www.kilduffs.com/Beer_116_Baltimore_FredBauernschmidtsAmericanBreweryBeer_Label.jpg';
 
-// Once we have our basic URL consts, let's write a
-// function that will return a beer based on an id we give it
-
-const beer = {
+// Our Beer object will contain all the methods we'll use:
+// A method for manipulating the data returned from the API
+// A methid for finding a beer by id
+// A methid for searching for beer by name
+const Beer = {
   find(beerId) {
     // We're going to use the es6 Promise object as a simple way
     // to turn our function into a Promise.
@@ -30,20 +31,13 @@ const beer = {
           // and then take that data and do some manipulation to get it
           // into the final format our schema expects
           const { id, name, description, abv, glasswareId, style, labels } = res.data;
-          const beerData = {
-            id,
-            name,
-            description,
-            abv,
-            glasswareId,
-            style: style.name,
-            label: labels.large,
-          };
+          // If the beer does not have a label image, let's replace it with a
+          // default image of our choosing.
+          const beerData = _.defaults(res.data, { labels: { large: defaultLabel } });
           // if we have our beerData, then resolve the promise
           resolve(beerData);
         })
-        // remember to catch any errors and log them
-        .catch((err) => console.log(err));
+        .catch((err) => reject(err));
     });
   },
   // Now we are going to create a function that will allow our users
@@ -58,18 +52,13 @@ const beer = {
         .then((res) => JSON.parse(res))
         .then((res) => {
           // if the server returns no data, resolve with a message
-          if (res.data === undefined) resolve('No data');
+          if (res.data === undefined) reject('No data');
           // We want to limit the returned search results to only the top 10
           res.data.splice(10, res.totalResults);
           // Now format each result to look like our schema
           const results = res.data.map((result) => {
-            const { id, name, description, abv, glasswareId, style } = result;
-            const beerData = { id, name, description, abv, glasswareId, style: style.name };
-            // If the beer does not have a label image, let's replace it with a
-            // default image of our choosing. If it does, use that image
-            if (!result.labels) beerData.label = 'http://www.kilduffs.com/Beer_116_Baltimore_FredBauernschmidtsAmericanBreweryBeer_Label.jpg';
-            else beerData.label = result.labels.large;
-            // return our formatted beer result
+            const { id, name, description, abv, glasswareId, style, labels } = res.data;
+            const beerData = _.defaults(res.data, { labels: { large: defaultLabel } });
             return beerData;
           });
           resolve(results);
@@ -79,4 +68,4 @@ const beer = {
   },
 };
 
-export default beer;
+export default Beer;

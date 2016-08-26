@@ -3,10 +3,13 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import mockery from 'mockery';
-import beer from '../../src/data/brewery.db.js';
+import sinon from 'sinon';
 import fs from 'fs';
 import _ from 'underscore';
 import rp from 'request-promise';
+
+import Beer from '../../src/data/brewerydb.connector.js';
+import Resolvers from '../../src/data/resolvers.js';
 
 const assert = chai.assert;
 chai.use(chaiAsPromised);
@@ -34,7 +37,8 @@ describe('File System', function () {
       if (err) console.log(err);
       assert.isTrue(_.contains(files, 'resolvers.js'));
       assert.isTrue(_.contains(files, 'schema.js'));
-      assert.isTrue(_.contains(files, 'connectors.js'));
+      assert.isTrue(_.contains(files, 'mongo.connector.js'));
+      assert.isTrue(_.contains(files, 'brewerydb.connector.js'));
       done();
     });
   });
@@ -43,10 +47,26 @@ describe('File System', function () {
 describe('Brewery DB Functions', function () {
   it('should export a findBeer function which returns a beer result', function () {
     const beerId = 'oeGSxs';
-    return assert.eventually.property(beer.find(beerId), 'id');
+    return assert.eventually.property(Beer.find(beerId), 'id');
   });
   it('should search for a beer and return < 10 results', function () {
-    const beerName = 'Miller High Life';
-    return assert.eventually.isArray(beer.search(beerName), 1);
+    const beerName = 'Miller high life';
+    return assert.eventually.isArray(Beer.search(beerName), 1);
+  });
+});
+
+describe('BreweryDB Resolvers', function () {
+  it('should find reviews using the reviews resolver', function () {
+    const mongoMock = sinon.mock(Beer);
+    const args = { beerId: 'oeGSxs' };
+    console.log(args);
+    // const spy = sinon.spy(Resolvers.RootQuery, 'reviews');
+    // call the function
+    // test that the returned object has the right fields
+    mongoMock.expects('find').once();
+    Resolvers.RootQuery.beer('_', args);
+    // verify that our mongoMock expectations were satisfied
+    mongoMock.verify();
+    mongoMock.restore();
   });
 });

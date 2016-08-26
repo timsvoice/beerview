@@ -3,7 +3,7 @@
 import { assert } from 'chai';
 import sinon from 'sinon';
 import casual from 'casual';
-import { Review } from '../../src/data/connectors.js';
+import { Review } from '../../src/data/mongo.connector.js';
 import Schema from '../../src/data/schema.js';
 import Resolvers from '../../src/data/resolvers.js';
 

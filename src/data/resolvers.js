@@ -8,7 +8,8 @@
 // on this object, create a RootQuery with a Beer method
 // the beer method should return an object with an id, name, and description
 
-import { Review } from './connectors.js';
+import { Review } from './mongo.connector.js';
+import Beer from './brewerydb.connector.js';
 
 const resolvers = {
   RootQuery: {
@@ -23,12 +24,15 @@ const resolvers = {
       // Return 10 reviews from the mongoDB
       return Review.find().limit(10).then((res) => res);
     },
-    beer() {
-      return {
-        id: 'aOx1',
-        name: 'Beer',
-        description: 'A really good beer',
-      };
+    // We can now replace our fake data with some real
+    // data from the brewerydb API
+    beer(_, args) {
+      //  return a beer from the breweryDB via id
+      return Beer.find(args.beerId);
+    },
+    beerSearch(_, args) {
+      // return a beer array from the breweryDB via name search
+      return Beer.searchBeer(args.query);
     },
   },
   // We're also going to add a Mutation to allow users to add their own reviews
